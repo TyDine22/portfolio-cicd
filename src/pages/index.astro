@@ -1,0 +1,942 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = await getCollection(
+  "projects",
+  ({ data }) => data.featured
+);
+
+const featuredProjects = projects
+  .sort(
+    (a, b) =>
+      a.data.order -
+      b.data.order
+  )
+  .slice(0, 4);
+---
+
+<BaseLayout
+  title="Home"
+  description="Portfolio of Ty Dine — Software Developer working across modern web development, DevOps, cloud infrastructure and AI."
+>
+
+  <!-- HERO -->
+
+  <section class="site-shell hero">
+
+    <div class="hero-grid">
+
+      <div class="hero-main">
+
+        <p class="eyebrow">
+          SOFTWARE DEVELOPER · DEVOPS · AI
+        </p>
+
+        <h1>
+          I build
+          <span>software</span>,
+          systems and
+          intelligent applications.
+        </h1>
+
+      </div>
+
+      <div class="hero-side">
+
+        <p class="intro">
+          I work across software development,
+          cloud-native infrastructure and applied AI,
+          turning ideas into practical systems.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            href="/projects"
+            class="primary-button"
+          >
+            Explore my work
+          </a>
+
+          <a
+            href="/about"
+            class="text-link"
+          >
+            More about me
+            <span>↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROFILE STRIP -->
+
+  <section class="profile-strip">
+
+    <div class="site-shell profile-grid">
+
+      <div class="profile-item">
+        <span class="profile-label">
+          FOCUS
+        </span>
+
+        <strong>
+          Software Engineering
+        </strong>
+      </div>
+
+      <div class="profile-item">
+        <span class="profile-label">
+          INFRASTRUCTURE
+        </span>
+
+        <strong>
+          Cloud & DevOps
+        </strong>
+      </div>
+
+      <div class="profile-item">
+        <span class="profile-label">
+          AI
+        </span>
+
+        <strong>
+          RAG & Local LLMs
+        </strong>
+      </div>
+
+      <div class="profile-item">
+        <span class="profile-label">
+          LOCATION
+        </span>
+
+        <strong>
+          Cambodia
+        </strong>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PROJECTS -->
+
+  <section class="site-shell section">
+
+    <SectionHeading
+      number="01"
+      label="SELECTED WORK"
+      title="Projects built beyond the classroom."
+      description="A selection of projects covering application development, AI systems, cloud infrastructure and automated software delivery."
+    />
+
+    <div class="projects-grid">
+
+      {
+        featuredProjects.map((project) => (
+			<ProjectCard
+				number={String(project.data.order).padStart(2, "0")}
+				title={project.data.title}
+				description={project.data.description}
+				technologies={project.data.technologies}
+				href={`/projects/${project.id}`}
+			/>
+		))
+      }
+
+    </div>
+
+    <div class="projects-footer">
+
+      <a
+        href="/projects"
+        class="all-projects-link"
+      >
+        View all projects
+        <span>→</span>
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CAPABILITIES -->
+
+  <section class="capabilities-section">
+
+    <div class="site-shell">
+
+      <SectionHeading
+        number="02"
+        label="CAPABILITIES"
+        title="From application code to deployment."
+        description="I enjoy understanding how the different layers of a system connect rather than working on only one part of the stack."
+      />
+
+      <div class="capability-grid">
+
+        <article class="capability">
+
+          <span>
+            01
+          </span>
+
+          <h3>
+            Software Development
+          </h3>
+
+          <p>
+            Building modern applications with
+            TypeScript, React, Next.js, Java
+            and Spring Boot.
+          </p>
+
+        </article>
+
+        <article class="capability">
+
+          <span>
+            02
+          </span>
+
+          <h3>
+            Cloud & DevOps
+          </h3>
+
+          <p>
+            Deploying and operating applications
+            with Docker, Kubernetes, Helm,
+            Jenkins and GitOps workflows.
+          </p>
+
+        </article>
+
+        <article class="capability">
+
+          <span>
+            03
+          </span>
+
+          <h3>
+            AI Engineering
+          </h3>
+
+          <p>
+            Exploring local language models,
+            embeddings, vector databases,
+            RAG pipelines and AI workflows.
+          </p>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT CTA -->
+
+  <section class="site-shell contact-section">
+
+    <div class="contact-card">
+
+      <p class="contact-label">
+        HAVE SOMETHING IN MIND?
+      </p>
+
+      <h2>
+        Let's build something
+        <em>useful.</em>
+      </h2>
+
+      <a
+        href="/contact"
+        class="contact-button"
+      >
+        Start a conversation
+        <span>↗</span>
+      </a>
+
+    </div>
+
+  </section>
+
+</BaseLayout>
+
+
+<style>
+
+  /* HERO */
+
+  .hero {
+    min-height:
+      calc(
+        100vh - 72px
+      );
+
+    display: flex;
+    align-items: center;
+
+    padding-block:
+      clamp(
+        80px,
+        12vw,
+        150px
+      );
+  }
+
+  .hero-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 2fr)
+      minmax(260px, 0.75fr);
+
+    align-items: end;
+
+    gap:
+      clamp(
+        50px,
+        8vw,
+        120px
+      );
+  }
+
+  .eyebrow {
+    margin:
+      0
+      0
+      28px;
+
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+
+    font-weight:
+      700;
+
+    letter-spacing:
+      0.18em;
+  }
+
+  h1 {
+    max-width:
+      920px;
+
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(
+        3.5rem,
+        7.8vw,
+        7.5rem
+      );
+
+    font-weight:
+      600;
+
+    line-height:
+      0.92;
+
+    letter-spacing:
+      -0.05em;
+  }
+
+  h1 span {
+    color:
+      var(--color-red);
+  }
+
+  .intro {
+    margin: 0;
+
+    color:
+      var(--color-ink-soft);
+
+    font-size:
+      1rem;
+
+    line-height:
+      1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+
+    align-items:
+      flex-start;
+
+    gap: 22px;
+
+    margin-top: 34px;
+  }
+
+  .primary-button {
+    display:
+      inline-flex;
+
+    padding:
+      13px
+      20px;
+
+    background:
+      var(--color-ink);
+
+    border:
+      1px solid
+      var(--color-ink);
+
+    color:
+      var(--color-paper);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+
+    font-weight:
+      600;
+
+    transition:
+      background
+      150ms ease,
+      border-color
+      150ms ease,
+      transform
+      150ms ease;
+  }
+
+  .primary-button:hover {
+    background:
+      var(--color-red);
+
+    border-color:
+      var(--color-red);
+
+    transform:
+      translateY(-2px);
+  }
+
+  .text-link {
+    display: flex;
+
+    gap: 8px;
+
+    color:
+      var(--color-ink-soft);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+
+    font-weight:
+      600;
+  }
+
+  .text-link:hover {
+    color:
+      var(--color-red);
+  }
+
+
+  /* PROFILE STRIP */
+
+  .profile-strip {
+    border-top:
+      1px solid
+      var(--color-line);
+
+    border-bottom:
+      1px solid
+      var(--color-line);
+  }
+
+  .profile-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        4,
+        1fr
+      );
+  }
+
+  .profile-item {
+    padding:
+      26px
+      24px;
+
+    border-right:
+      1px solid
+      var(--color-line);
+  }
+
+  .profile-item:first-child {
+    padding-left: 0;
+  }
+
+  .profile-item:last-child {
+    border-right: 0;
+  }
+
+  .profile-label {
+    display: block;
+
+    margin-bottom:
+      6px;
+
+    color:
+      var(--color-ink-faint);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      9px;
+
+    letter-spacing:
+      0.12em;
+  }
+
+  .profile-item strong {
+    font-size:
+      13px;
+
+    font-weight:
+      600;
+  }
+
+
+  /* SECTIONS */
+
+  .section {
+    padding-block:
+      clamp(
+        100px,
+        12vw,
+        160px
+      );
+  }
+
+
+  /* PROJECTS */
+
+  .projects-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+
+    gap: 40px;
+  }
+
+  .projects-footer {
+    display: flex;
+
+    justify-content:
+      flex-end;
+
+    margin-top:
+      60px;
+  }
+
+  .all-projects-link {
+    display:
+      inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-bottom:
+      6px;
+
+    border-bottom:
+      1px solid
+      var(--color-ink);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      12px;
+
+    font-weight:
+      600;
+  }
+
+  .all-projects-link:hover {
+    color:
+      var(--color-red);
+
+    border-color:
+      var(--color-red);
+  }
+
+
+  /* CAPABILITIES */
+
+  .capabilities-section {
+    padding-block:
+      clamp(
+        100px,
+        12vw,
+        150px
+      );
+
+    background:
+      var(--color-dark);
+
+    color:
+      var(--color-paper);
+  }
+
+  .capabilities-section
+    :global(.section-heading p) {
+
+    color:
+      #aaa09a;
+  }
+
+  .capability-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    border-top:
+      1px solid
+      #3a312d;
+  }
+
+  .capability {
+    min-height:
+      310px;
+
+    padding:
+      34px;
+
+    border-right:
+      1px solid
+      #3a312d;
+  }
+
+  .capability:first-child {
+    padding-left: 0;
+  }
+
+  .capability:last-child {
+    border-right: 0;
+  }
+
+  .capability > span {
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+  }
+
+  .capability h3 {
+    margin:
+      90px
+      0
+      0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      2rem;
+
+    font-weight:
+      600;
+  }
+
+  .capability p {
+    margin:
+      18px
+      0
+      0;
+
+    color:
+      #aaa09a;
+
+    line-height:
+      1.7;
+  }
+
+
+  /* CONTACT */
+
+  .contact-section {
+    padding-block:
+      clamp(
+        100px,
+        13vw,
+        170px
+      );
+  }
+
+  .contact-card {
+    display: grid;
+
+    grid-template-columns:
+      1fr auto;
+
+    align-items: end;
+
+    gap: 40px;
+
+    padding:
+      clamp(
+        40px,
+        6vw,
+        80px
+      );
+
+    background:
+      var(--color-red);
+
+    color:
+      white;
+  }
+
+  .contact-label {
+    grid-column:
+      1 / -1;
+
+    margin: 0;
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      10px;
+
+    font-weight:
+      700;
+
+    letter-spacing:
+      0.16em;
+  }
+
+  .contact-card h2 {
+    max-width:
+      720px;
+
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(
+        3rem,
+        6vw,
+        6rem
+      );
+
+    font-weight:
+      600;
+
+    line-height:
+      0.95;
+
+    letter-spacing:
+      -0.04em;
+  }
+
+  .contact-card h2 em {
+    font-style:
+      italic;
+  }
+
+  .contact-button {
+    display:
+      inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+      14px
+      18px;
+
+    background:
+      white;
+
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+
+    font-weight:
+      700;
+  }
+
+
+  /* RESPONSIVE */
+
+  @media (
+    max-width:
+      900px
+  ) {
+
+    .hero-grid {
+      grid-template-columns:
+        1fr;
+    }
+
+    .hero-side {
+      max-width:
+        550px;
+    }
+
+    .profile-grid {
+      grid-template-columns:
+        repeat(
+          2,
+          1fr
+        );
+    }
+
+    .profile-item:nth-child(2) {
+      border-right: 0;
+    }
+
+    .profile-item:nth-child(-n + 2) {
+      border-bottom:
+        1px solid
+        var(--color-line);
+    }
+
+    .projects-grid {
+      grid-template-columns:
+        1fr;
+    }
+
+    .capability-grid {
+      grid-template-columns:
+        1fr;
+    }
+
+    .capability {
+      min-height:
+        auto;
+
+      padding:
+        32px
+        0;
+
+      border-right: 0;
+
+      border-bottom:
+        1px solid
+        #3a312d;
+    }
+
+    .capability h3 {
+      margin-top:
+        45px;
+    }
+
+    .contact-card {
+      grid-template-columns:
+        1fr;
+    }
+
+    .contact-button {
+      justify-self:
+        start;
+    }
+
+  }
+
+
+  @media (
+    max-width:
+      560px
+  ) {
+
+    .hero {
+      min-height: auto;
+    }
+
+    h1 {
+      font-size:
+        clamp(
+          3.3rem,
+          16vw,
+          5rem
+        );
+    }
+
+    .profile-grid {
+      grid-template-columns:
+        1fr;
+    }
+
+    .profile-item {
+      padding:
+        20px
+        0;
+
+      border-right: 0;
+
+      border-bottom:
+        1px solid
+        var(--color-line);
+    }
+
+    .profile-item:last-child {
+      border-bottom: 0;
+    }
+
+  }
+
+</style>

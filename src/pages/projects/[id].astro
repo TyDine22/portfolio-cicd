@@ -1,0 +1,265 @@
+---
+import {
+  getCollection,
+  render,
+  type CollectionEntry,
+} from "astro:content";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: {
+      id: project.id,
+    },
+
+    props: {
+      project,
+    },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+
+const { Content } = await render(project);
+---
+
+<BaseLayout
+  title={project.data.title}
+  description={project.data.description}
+>
+
+  <article class="site-shell project">
+
+    <header class="project-header">
+
+      <a
+        href="/projects"
+        class="back-link"
+      >
+        ← All projects
+      </a>
+
+      <p class="category">
+        {project.data.category}
+        /
+        {project.data.year}
+      </p>
+
+      <h1>
+        {project.data.title}
+      </h1>
+
+      <p class="description">
+        {project.data.description}
+      </p>
+
+      <div class="technologies">
+
+        {
+          project.data.technologies.map((technology) => (
+            <span>
+              {technology}
+            </span>
+          ))
+        }
+
+      </div>
+
+    </header>
+
+
+    <div class="project-content">
+
+      <Content />
+
+    </div>
+
+  </article>
+
+</BaseLayout>
+
+
+<style>
+
+  .project {
+    padding-block:
+      clamp(
+        80px,
+        10vw,
+        140px
+      );
+  }
+
+  .project-header {
+    max-width: 900px;
+
+    padding-bottom: 70px;
+
+    border-bottom:
+      1px solid
+      var(--color-line);
+  }
+
+  .back-link {
+    display: inline-block;
+
+    margin-bottom: 70px;
+
+    color:
+      var(--color-ink-soft);
+
+    font-family:
+      var(--font-mono);
+
+    font-size: 11px;
+  }
+
+  .back-link:hover {
+    color:
+      var(--color-red);
+  }
+
+  .category {
+    margin: 0 0 20px;
+
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+  h1 {
+    max-width: 900px;
+
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(
+        3.5rem,
+        8vw,
+        7rem
+      );
+
+    font-weight: 600;
+
+    line-height: 0.95;
+
+    letter-spacing: -0.045em;
+  }
+
+  .description {
+    max-width: 700px;
+
+    margin: 36px 0 0;
+
+    color:
+      var(--color-ink-soft);
+
+    font-size:
+      1.15rem;
+
+    line-height: 1.8;
+  }
+
+  .technologies {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 34px;
+  }
+
+  .technologies span {
+    padding:
+      7px
+      10px;
+
+    border:
+      1px solid
+      var(--color-line);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      10px;
+  }
+
+
+  /*
+    Markdown content
+  */
+
+  .project-content {
+    max-width: 760px;
+
+    margin-top: 80px;
+  }
+
+  .project-content :global(h2) {
+    margin:
+      70px
+      0
+      24px;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(
+        2rem,
+        4vw,
+        3rem
+      );
+
+    font-weight: 600;
+  }
+
+  .project-content :global(p) {
+    margin:
+      0
+      0
+      24px;
+
+    color:
+      var(--color-ink-soft);
+
+    line-height: 1.85;
+  }
+
+  .project-content :global(ul),
+  .project-content :global(ol) {
+    margin:
+      24px
+      0;
+
+    padding-left: 24px;
+
+    color:
+      var(--color-ink-soft);
+  }
+
+  .project-content :global(li) {
+    margin-bottom: 10px;
+  }
+
+</style>

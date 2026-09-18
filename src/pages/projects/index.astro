@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const projects = await getCollection("projects");
+
+const sortedProjects = projects.sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Selected software engineering, DevOps, cloud and AI projects by Ty Dine."
+>
+
+  <section class="site-shell projects-page">
+
+    <SectionHeading
+      number="01"
+      label="PROJECTS"
+      title="Selected work."
+      description="Projects exploring software engineering, cloud infrastructure, DevOps automation and applied AI."
+    />
+
+    <div class="projects-grid">
+
+      {
+        sortedProjects.map((project) => (
+          <ProjectCard
+            number={String(project.data.order).padStart(2, "0")}
+            title={project.data.title}
+            description={project.data.description}
+            technologies={project.data.technologies}
+            href={`/projects/${project.id}`}
+          />
+        ))
+      }
+
+    </div>
+
+  </section>
+
+</BaseLayout>
+
+<style>
+  .projects-page {
+    padding-block:
+      clamp(
+        100px,
+        12vw,
+        160px
+      );
+  }
+
+  .projects-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    gap: 40px;
+  }
+
+  @media (max-width: 800px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

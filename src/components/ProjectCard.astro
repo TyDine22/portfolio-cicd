@@ -1,0 +1,184 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  href?: string;
+}
+
+const {
+  number,
+  title,
+  description,
+  technologies,
+  href = "/projects",
+} = Astro.props;
+---
+
+<article class="project-card">
+
+  <div class="project-top">
+
+    <span class="project-number">
+      {number}
+    </span>
+
+    <span class="project-arrow">
+      ↗
+    </span>
+
+  </div>
+
+  <div class="project-content">
+
+    <h3>
+      <a href={href}>
+        {title}
+      </a>
+    </h3>
+
+    <p>
+      {description}
+    </p>
+
+  </div>
+
+  <div class="technologies">
+
+    {
+      technologies.map((technology) => (
+        <span>
+          {technology}
+        </span>
+      ))
+    }
+
+  </div>
+
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+
+    min-height: 380px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+
+    background: var(--color-card);
+
+    border: 1px solid var(--color-line);
+
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .project-card::after {
+    content: "";
+
+    position: absolute;
+
+    inset:
+      10px
+      -10px
+      -10px
+      10px;
+
+    z-index: -1;
+
+    background: var(--color-red);
+  }
+
+  .project-card:hover {
+    transform: translate(
+      -3px,
+      -3px
+    );
+
+    box-shadow:
+      6px
+      6px
+      0
+      var(--color-red);
+  }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .project-number {
+    color: var(--color-red);
+
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .project-arrow {
+    font-size: 22px;
+  }
+
+  .project-content {
+    margin-top: 70px;
+  }
+
+  h3 {
+    margin: 0;
+
+    font-family: var(--font-display);
+
+    font-size: clamp(
+      1.8rem,
+      3vw,
+      2.6rem
+    );
+
+    font-weight: 600;
+
+    line-height: 1.05;
+  }
+
+  h3 a:hover {
+    color: var(--color-red);
+  }
+
+  p {
+    margin: 20px 0 0;
+
+    color: var(--color-ink-soft);
+
+    line-height: 1.7;
+  }
+
+  .technologies {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: auto;
+    padding-top: 36px;
+  }
+
+  .technologies span {
+    padding:
+      6px
+      9px;
+
+    border: 1px solid var(--color-line);
+
+    background: var(--color-paper);
+
+    font-family: var(--font-mono);
+    font-size: 10px;
+
+    letter-spacing: 0.03em;
+  }
+</style>
