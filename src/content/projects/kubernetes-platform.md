@@ -14,6 +14,9 @@ year: 2026
 
 featured: true
 order: 2
+
+hero: "../../assets/projects/kubernetes-platform/hero.png"
+heroAlt: "Kubernetes cluster running across three Google Cloud virtual machines"
 ---
 
 ## Overview

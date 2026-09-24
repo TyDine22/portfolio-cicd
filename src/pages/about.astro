@@ -1,23 +1,910 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+
+const skillGroups = [
+  {
+    title: "Frontend",
+    skills: [
+      "TypeScript",
+      "JavaScript",
+      "React",
+      "Next.js",
+      "Astro",
+      "Tailwind CSS",
+    ],
+  },
+
+  {
+    title: "Backend",
+    skills: [
+      "Java",
+      "Spring Boot",
+      "Node.js",
+      "Express",
+      "REST APIs",
+    ],
+  },
+
+  {
+    title: "Data",
+    skills: [
+      "PostgreSQL",
+      "MyBatis",
+      "Prisma",
+      "SQL",
+      "ChromaDB",
+    ],
+  },
+
+  {
+    title: "Cloud & DevOps",
+    skills: [
+      "Docker",
+      "Kubernetes",
+      "Helm",
+      "Jenkins",
+      "Argo CD",
+      "Istio",
+      "GCP",
+    ],
+  },
+
+  {
+    title: "AI Engineering",
+    skills: [
+      "Python",
+      "Ollama",
+      "RAG",
+      "Embeddings",
+      "Vector Search",
+      "Local LLMs",
+    ],
+  },
+];
+
+const timeline = [
+  {
+    period: "2026 — Present",
+    title: "Advanced Software & AI Training",
+    organization: "Korea Software HRD Center",
+    description:
+      "Focused on AI engineering, local LLM systems, RAG, DevOps, Kubernetes, GitOps and modern software delivery.",
+  },
+
+  {
+    period: "2026",
+    title: "Software Development Training",
+    organization: "Korea Software HRD Center",
+    description:
+      "Studied full-stack software development using Java, Spring Boot, PostgreSQL, React, Next.js and related technologies.",
+  },
+];
 ---
 
-<BaseLayout title="About">
+<BaseLayout
+  title="About"
+  description="Learn more about Ty Dine, a software developer working across software engineering, DevOps, cloud infrastructure and AI."
+>
 
-  <section class="site-shell py-32">
+  <!-- INTRO -->
 
-    <p class="font-mono text-sm text-red">
-      01 / ABOUT
-    </p>
+  <section class="site-shell about-hero">
 
-    <h1 class="mt-5 font-display text-6xl font-semibold">
-      About me
-    </h1>
+    <div class="about-grid">
 
-    <p class="mt-8 max-w-2xl text-lg text-ink-soft">
-      This page will be rebuilt next.
-    </p>
+      <div>
+
+        <p class="eyebrow">
+          ABOUT ME
+        </p>
+
+        <h1>
+          I like understanding&nbsp;
+          <span>how the whole system works.</span>
+        </h1>
+
+      </div>
+
+      <div class="intro-copy">
+
+        <p>
+          I'm a software developer interested in more than
+          just writing application code.
+        </p>
+
+        <p>
+          I enjoy understanding how applications are designed,
+          deployed, connected, automated and improved with
+          modern AI systems.
+        </p>
+
+        <p>
+          My current work spans software engineering,
+          cloud-native infrastructure, DevOps and AI engineering.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CURRENT FOCUS -->
+
+  <section class="focus-section">
+
+    <div class="site-shell">
+
+      <SectionHeading
+        number="01"
+        label="CURRENT FOCUS"
+        title="Building across multiple layers."
+        description="My goal is to understand both the application and the systems that support it."
+      />
+
+      <div class="focus-grid">
+
+        <article>
+
+          <span>
+            01
+          </span>
+
+          <h3>
+            Software
+          </h3>
+
+          <p>
+            Designing and developing modern web applications,
+            APIs and backend services.
+          </p>
+
+        </article>
+
+
+        <article>
+
+          <span>
+            02
+          </span>
+
+          <h3>
+            Infrastructure
+          </h3>
+
+          <p>
+            Learning how applications are containerized,
+            deployed, automated and operated in cloud
+            environments.
+          </p>
+
+        </article>
+
+
+        <article>
+
+          <span>
+            03
+          </span>
+
+          <h3>
+            AI
+          </h3>
+
+          <p>
+            Exploring local language models, RAG systems,
+            retrieval pipelines and agent-based workflows.
+          </p>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- JOURNEY -->
+
+  <section class="site-shell about-section">
+
+    <SectionHeading
+      number="02"
+      label="JOURNEY"
+      title="Learning by building."
+      description="My training has gradually expanded from application development into cloud infrastructure, DevOps and AI engineering."
+    />
+
+    <div class="timeline">
+
+      {
+        timeline.map((item) => (
+
+          <article class="timeline-item">
+
+            <div class="timeline-period">
+              {item.period}
+            </div>
+
+            <div class="timeline-content">
+
+              <h3>
+                {item.title}
+              </h3>
+
+              <p class="organization">
+                {item.organization}
+              </p>
+
+              <p class="timeline-description">
+                {item.description}
+              </p>
+
+            </div>
+
+          </article>
+
+        ))
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- STACK -->
+
+  <section class="stack-section">
+
+    <div class="site-shell">
+
+      <SectionHeading
+        number="03"
+        label="TECHNOLOGIES"
+        title="Tools I work with."
+        description="The technologies change depending on the problem, but these are the main tools in my current stack."
+      />
+
+      <div class="skills">
+
+        {
+          skillGroups.map((group) => (
+
+            <div class="skill-group">
+
+              <h3>
+                {group.title}
+              </h3>
+
+              <div class="skill-list">
+
+                {
+                  group.skills.map((skill) => (
+                    <span>
+                      {skill}
+                    </span>
+                  ))
+                }
+
+              </div>
+
+            </div>
+
+          ))
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PHILOSOPHY -->
+
+  <section class="site-shell philosophy-section">
+
+    <div class="philosophy">
+
+      <p class="philosophy-label">
+        HOW I APPROACH TECHNOLOGY
+      </p>
+
+      <blockquote>
+        I don't want to learn technologies only to say
+        that I know them.&nbsp;
+        <span>
+          I want to understand why they exist,
+          where they fit and what problem they solve.
+        </span>
+      </blockquote>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="site-shell about-cta">
+
+    <div>
+
+      <p>
+        WANT TO SEE WHAT I'VE BUILT?
+      </p>
+
+      <h2>
+        Explore my projects.
+      </h2>
+
+    </div>
+
+    <a href="/projects">
+      View projects →
+    </a>
 
   </section>
 
 </BaseLayout>
+
+
+<style>
+
+  /* HERO */
+
+  .about-hero {
+    padding-block:
+      clamp(90px, 12vw, 160px);
+  }
+
+  .about-grid {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.5fr)
+      minmax(280px, 0.7fr);
+
+    align-items: end;
+
+    gap:
+      clamp(50px, 9vw, 120px);
+  }
+
+  .eyebrow {
+    margin:
+      0
+      0
+      26px;
+
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+
+    font-weight:
+      700;
+
+    letter-spacing:
+      0.16em;
+  }
+
+  h1 {
+    max-width:
+      850px;
+
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(3.6rem, 7vw, 7rem);
+
+    font-weight:
+      600;
+
+    line-height:
+      0.94;
+
+    letter-spacing:
+      -0.05em;
+  }
+
+  h1 span {
+    color:
+      var(--color-red);
+  }
+
+  .intro-copy {
+    color:
+      var(--color-ink-soft);
+
+    line-height:
+      1.8;
+  }
+
+  .intro-copy p {
+    margin:
+      0
+      0
+      22px;
+  }
+
+
+  /* FOCUS */
+
+  .focus-section {
+    padding-block:
+      clamp(100px, 12vw, 150px);
+
+    background:
+      var(--color-dark);
+
+    color:
+      var(--color-paper);
+  }
+
+  .focus-section
+    :global(.section-heading p) {
+    color: #aaa09a;
+  }
+
+  .focus-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    border-top:
+      1px solid
+      #3a312d;
+  }
+
+  .focus-grid article {
+    min-height:
+      300px;
+
+    padding:
+      32px;
+
+    border-right:
+      1px solid
+      #3a312d;
+  }
+
+  .focus-grid article:first-child {
+    padding-left: 0;
+  }
+
+  .focus-grid article:last-child {
+    border-right: 0;
+  }
+
+  .focus-grid span {
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+  }
+
+  .focus-grid h3 {
+    margin:
+      80px
+      0
+      18px;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      2rem;
+
+    font-weight:
+      600;
+  }
+
+  .focus-grid p {
+    margin: 0;
+
+    color:
+      #aaa09a;
+
+    line-height:
+      1.7;
+  }
+
+
+  /* GENERIC ABOUT SECTION */
+
+  .about-section {
+    padding-block:
+      clamp(100px, 13vw, 170px);
+  }
+
+
+  /* TIMELINE */
+
+  .timeline {
+    border-top:
+      1px solid
+      var(--color-line);
+  }
+
+  .timeline-item {
+    display: grid;
+
+    grid-template-columns:
+      220px
+      minmax(0, 1fr);
+
+    gap:
+      50px;
+
+    padding:
+      38px
+      0;
+
+    border-bottom:
+      1px solid
+      var(--color-line);
+  }
+
+  .timeline-period {
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+
+    font-weight:
+      700;
+  }
+
+  .timeline-content {
+    max-width:
+      700px;
+  }
+
+  .timeline-content h3 {
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(1.7rem, 3vw, 2.5rem);
+
+    font-weight:
+      600;
+  }
+
+  .organization {
+    margin:
+      8px
+      0
+      0;
+
+    color:
+      var(--color-ink);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+  }
+
+  .timeline-description {
+    margin:
+      20px
+      0
+      0;
+
+    color:
+      var(--color-ink-soft);
+
+    line-height:
+      1.8;
+  }
+
+
+  /* SKILLS */
+
+  .stack-section {
+    padding-block:
+      clamp(100px, 12vw, 160px);
+
+    background:
+      var(--color-card);
+  }
+
+  .skills {
+    border-top:
+      1px solid
+      var(--color-line);
+  }
+
+  .skill-group {
+    display: grid;
+
+    grid-template-columns:
+      220px
+      1fr;
+
+    gap:
+      50px;
+
+    padding:
+      30px
+      0;
+
+    border-bottom:
+      1px solid
+      var(--color-line);
+  }
+
+  .skill-group h3 {
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      1.5rem;
+
+    font-weight:
+      600;
+  }
+
+  .skill-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+  }
+
+  .skill-list span {
+    padding:
+      8px
+      11px;
+
+    background:
+      var(--color-paper);
+
+    border:
+      1px solid
+      var(--color-line);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      10px;
+  }
+
+
+  /* PHILOSOPHY */
+
+  .philosophy-section {
+    padding-block:
+      clamp(100px, 14vw, 180px);
+  }
+
+  .philosophy {
+    max-width:
+      950px;
+
+    margin-inline:
+      auto;
+
+    text-align:
+      center;
+  }
+
+  .philosophy-label {
+    margin:
+      0
+      0
+      32px;
+
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      10px;
+
+    font-weight:
+      700;
+
+    letter-spacing:
+      0.14em;
+  }
+
+  blockquote {
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(2.2rem, 5vw, 4.5rem);
+
+    font-weight:
+      600;
+
+    line-height:
+      1.05;
+
+    letter-spacing:
+      -0.035em;
+  }
+
+  blockquote span {
+    color:
+      var(--color-red);
+  }
+
+
+  /* CTA */
+
+  .about-cta {
+    display: flex;
+
+    align-items: end;
+    justify-content: space-between;
+
+    gap:
+      50px;
+
+    padding-block:
+      70px;
+
+    border-top:
+      1px solid
+      var(--color-line);
+  }
+
+  .about-cta p {
+    margin:
+      0
+      0
+      12px;
+
+    color:
+      var(--color-red);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      10px;
+
+    font-weight:
+      700;
+
+    letter-spacing:
+      0.13em;
+  }
+
+  .about-cta h2 {
+    margin: 0;
+
+    font-family:
+      var(--font-display);
+
+    font-size:
+      clamp(2.5rem, 5vw, 4rem);
+
+    font-weight:
+      600;
+  }
+
+  .about-cta a {
+    flex-shrink: 0;
+
+    padding:
+      13px
+      18px;
+
+    background:
+      var(--color-ink);
+
+    color:
+      var(--color-paper);
+
+    font-family:
+      var(--font-mono);
+
+    font-size:
+      11px;
+
+    font-weight:
+      600;
+  }
+
+  .about-cta a:hover {
+    background:
+      var(--color-red);
+  }
+
+
+  /* RESPONSIVE */
+
+  @media (max-width: 800px) {
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .intro-copy {
+      max-width:
+        600px;
+    }
+
+    .focus-grid {
+      grid-template-columns:
+        1fr;
+    }
+
+    .focus-grid article {
+      min-height: auto;
+
+      padding:
+        32px
+        0;
+
+      border-right: 0;
+
+      border-bottom:
+        1px solid
+        #3a312d;
+    }
+
+    .focus-grid article:last-child {
+      border-bottom: 0;
+    }
+
+    .focus-grid h3 {
+      margin-top:
+        42px;
+    }
+
+    .timeline-item,
+    .skill-group {
+      grid-template-columns:
+        1fr;
+
+      gap:
+        16px;
+    }
+
+    .about-cta {
+      align-items:
+        flex-start;
+
+      flex-direction:
+        column;
+    }
+
+  }
+
+</style>

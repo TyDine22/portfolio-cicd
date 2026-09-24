@@ -8,21 +8,25 @@ const projects = defineCollection({
     base: "./src/content/projects",
   }),
 
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
 
-    technologies: z.array(z.string()),
+      technologies: z.array(z.string()),
 
-    category: z.string(),
-    year: z.number(),
+      category: z.string(),
+      year: z.number(),
 
-    featured: z.boolean().default(false),
-    order: z.number(),
+      featured: z.boolean().default(false),
+      order: z.number(),
 
-    github: z.string().optional(),
-    demo: z.string().optional(),
-  }),
+      hero: image().optional(),
+      heroAlt: z.string().optional(),
+
+      github: z.string().optional(),
+      demo: z.string().optional(),
+    }),
 });
 
 export const collections = {
